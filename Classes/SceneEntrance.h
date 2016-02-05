@@ -11,5 +11,5 @@ public:
 	CREATE_FUNC(SceneEntrance);
 };
 
-#endif
+#endif // _SCENE_ENTRANCE_H_
 

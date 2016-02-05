@@ -3,7 +3,7 @@
 
 #define DESKTOP_PLATFORM (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
 
-#define ENABLE_FULLSCREEN 1
+#define ENABLE_FULLSCREEN 0
 
 using namespace cocos2d;
 
@@ -31,7 +31,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-#if ENABLE_FULLSCREEN && DESKTOP_PLATFORM
+#if (ENABLE_FULLSCREEN && DESKTOP_PLATFORM)
 		glview = GLViewImpl::createWithFullScreen("RetrieveMyself");
 #elif DESKTOP_PLATFORM
 		glview = GLViewImpl::createWithRect("RetrieveMyself", Rect(0, 0, 960, 640));
@@ -42,18 +42,16 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
     director->getOpenGLView()->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
 
-#if COCOS2D_DEBUG
+#if (COCOS2D_DEBUG)
     // Turn on FPS display
     director->setDisplayStats(true);
 
     // Set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval((float)(1.0 / 60));
 #endif
-    // Create entry scene. it's an autorelease object
-    auto entry = SceneEntrance::create();
 
-    // Run the entry scene
-    director->runWithScene(entry);
+    // Create and run the entry scene
+    director->runWithScene(SceneEntrance::create());
 
     return true;
 }
@@ -66,7 +64,7 @@ void AppDelegate::applicationDidEnterBackground() {
     // SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }
 
-// this function will be called when the app is active again
+// This function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground() {
     Director::getInstance()->startAnimation();
 

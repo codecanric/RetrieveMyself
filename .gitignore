@@ -6,7 +6,6 @@ proj.android/gen/
 proj.android/obj/local
 proj.android/libs/armeabi/
 proj.android/local.properties
-proj.android/project.properties
 
 ## Visual Studio
 proj.win32/RetrieveMyself.sdf
